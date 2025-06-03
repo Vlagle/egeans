@@ -232,6 +232,7 @@
     </div>
 
     <script>
+        const STORAGE_PREFIX = 'var2';
         // Правильные ответы
         const correctAnswers = {
             1: "14",
@@ -325,9 +326,9 @@
         // Загрузка сохраненных ответов
         function loadAnswers() {
             for (let i = 1; i <= 27; i++) {
-                const savedAnswer = localStorage.getItem(`2_answer_${i}`);
+                const savedAnswer = localStorage.getItem(`${STORAGE_PREFIX}answer_${i}`);
                 if (savedAnswer) {
-                    const field = document.getElementById(`2_answer${i}`);
+                    const field = document.getElementById(`answer${i}`);
                     if (field) {
                         field.value = savedAnswer;
                     }
@@ -338,9 +339,9 @@
         // Сохранение ответов
         function saveAnswers() {
             for (let i = 1; i <= 27; i++) {
-                const field = document.getElementById(`2_answer${i}`);
+                const field = document.getElementById(`answer${i}`);
                 if (field && field.value) {
-                    localStorage.setItem(`2_answer_${i}`, field.value);
+                    localStorage.setItem(`${STORAGE_PREFIX}answer_${i}`, field.value);
                 }
             }
             alert('Ответы сохранены!');
@@ -352,7 +353,7 @@
             let resultsHTML = '';
             
             for (let i = 1; i <= 27; i++) {
-                const userAnswer = document.getElementById(`2_answer${i}`).value.trim();
+                const userAnswer = document.getElementById(`answer${i}`).value.trim();
                 const correctAnswer = correctAnswers[i];
                 let isCorrect = false;
                 
@@ -394,11 +395,11 @@
         function resetAnswers() {
             if (confirm('Вы действительно хотите сбросить все ответы?')) {
                 for (let i = 1; i <= 27; i++) {
-                    const field = document.getElementById(`2_answer${i}`);
+                    const field = document.getElementById(`answer${i}`);
                     if (field) {
                         field.value = '';
                     }
-                    localStorage.removeItem(`2_answer_${i}`);
+                    localStorage.removeItem(`${STORAGE_PREFIX}answer_${i}`);
                 }
                 document.getElementById('results').style.display = 'none';
             }
@@ -416,7 +417,7 @@
             const inputs = document.querySelectorAll('input, textarea');
             inputs.forEach(input => {
                 input.addEventListener('change', function() {
-                    localStorage.setItem(`2_answer_${this.dataset.task}`, this.value);
+                    localStorage.setItem(`answer_${this.dataset.task}`, this.value);
                 });
             });
         });
