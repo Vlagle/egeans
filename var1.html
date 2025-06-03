@@ -232,6 +232,7 @@
     </div>
 
     <script>
+        const STORAGE_PREFIX = 'var1';
         // Правильные ответы
         const correctAnswers = {
             1: "44",
@@ -325,7 +326,7 @@
         // Загрузка сохраненных ответов
         function loadAnswers() {
             for (let i = 1; i <= 27; i++) {
-                const savedAnswer = localStorage.getItem(`answer_${i}`);
+                const savedAnswer = localStorage.getItem(`${STORAGE_PREFIX}answer_${i}`);
                 if (savedAnswer) {
                     const field = document.getElementById(`answer${i}`);
                     if (field) {
@@ -340,7 +341,7 @@
             for (let i = 1; i <= 27; i++) {
                 const field = document.getElementById(`answer${i}`);
                 if (field && field.value) {
-                    localStorage.setItem(`answer_${i}`, field.value);
+                    localStorage.setItem(`${STORAGE_PREFIX}answer_${i}`, field.value);
                 }
             }
             alert('Ответы сохранены!');
@@ -398,7 +399,7 @@
                     if (field) {
                         field.value = '';
                     }
-                    localStorage.removeItem(`answer_${i}`);
+                    localStorage.removeItem(`${STORAGE_PREFIX}answer_${i}`);
                 }
                 document.getElementById('results').style.display = 'none';
             }
