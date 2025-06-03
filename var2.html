@@ -417,7 +417,7 @@
             const inputs = document.querySelectorAll('input, textarea');
             inputs.forEach(input => {
                 input.addEventListener('change', function() {
-                    localStorage.setItem(`answer_${this.dataset.task}`, this.value);
+                    localStorage.setItem(`${STORAGE_PREFIX}answer_${this.dataset.task}`, this.value);
                 });
             });
         });
